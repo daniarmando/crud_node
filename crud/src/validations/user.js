@@ -2,9 +2,12 @@ const valid_login = (req, resp, next) => {
     const { email, password } = req.body;
     try {
 
-        //validar se o email e válido e adicionar no if abaixo
-        function emailFormat() {
+        function emailFormat() {            
+            return /\S+@\S+\.\S+/.test(email);
+        }
 
+        if (emailFormat) {
+            throw new Error('Email inválido');
         }
 
         if (email && password && typeof(email) === 'string' && typeof(password) === 'string') {
